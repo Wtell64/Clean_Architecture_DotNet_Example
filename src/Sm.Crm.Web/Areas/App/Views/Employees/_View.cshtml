@@ -1,0 +1,18 @@
+﻿@model CustomerDto
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "Customer Detail" })
+<div class="modal-body">
+    <div class="row mb-3">
+        <label asp-for="CompanyName" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.CompanyName</span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="TitleName" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.TitleName</span>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true, CancelButtonText = "Close" })

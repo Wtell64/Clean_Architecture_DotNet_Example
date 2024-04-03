@@ -1,0 +1,45 @@
+@host = https://localhost:8080
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjQ5ZjhjNmFmLTczYjQtNGZlZC1hYzlkLTQzOGEwMDZhMTZhZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbmlzdHJhdG9yQGxvY2FsaG9zdCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6IkFkbWluIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6IkFkbWluIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiYWRtaW5pc3RyYXRvckBsb2NhbGhvc3QiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbmlzdHJhdG9yIiwibmJmIjoxNzExODM4MzI1LCJleHAiOjE3MTE4NDE5MjUsImlzcyI6IlNtLkNybS5XZWJBcGkiLCJhdWQiOiJTbS5Dcm0uV2ViQXBpIn0.wTBNQIXQgYAgoKR-rkETtYljYf-ucDK5xmB6_apnbxg
+
+###
+
+POST {{host}}/api/auth/authenticate
+Content-Type: application/json
+
+{
+  "email": "administrator@localhost",
+  "password": "Administrator1!"
+}
+
+###
+
+GET {{host}}/api/titles
+Authorization: Bearer {{token}}
+
+###
+
+GET {{host}}/api/customers
+
+###
+
+GET {{host}}/api/customers
+Authorization: Bearer {{token}}
+
+###
+
+POST {{host}}/api/customers
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 0,
+  "identityNumber": "123459",
+  "customerType": 1,
+  "companyName": "Deneme",
+  "birthDate": "2000-01-01",
+  "userId": null,
+  "gender": 1,
+  "statusTypeId": 1,
+  "titleId": 1,
+  "territoryId": 1
+}

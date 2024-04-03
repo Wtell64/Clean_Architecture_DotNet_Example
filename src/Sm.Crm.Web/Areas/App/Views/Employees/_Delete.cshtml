@@ -1,0 +1,9 @@
+﻿@model CustomerDto
+
+<form asp-action="DeleteCustomerItem" asp-route-id="@Model.Id" role="form">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "Delete Customer" })
+    <div class="modal-body form-horizontal">
+        Are you want to delete @Model.CompanyName?
+    </div>
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })
+</form>

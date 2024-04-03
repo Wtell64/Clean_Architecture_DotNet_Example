@@ -1,0 +1,7 @@
+@import './base.css';
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
+
+.p-dropdown,
+.p-calendar {
+    width: 100%;
+}

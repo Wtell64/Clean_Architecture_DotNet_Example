@@ -1,0 +1,24 @@
+﻿@model UserAddressDto
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "User Addresses Detail" })
+<div class="modal-body">
+    <div class="row mb-3">
+        <label asp-for="Country" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.Country</span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="City" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.City</span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="City" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.Address</span>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true, CancelButtonText = "Close" })

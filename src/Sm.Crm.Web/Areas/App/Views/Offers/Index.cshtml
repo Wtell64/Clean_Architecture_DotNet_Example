@@ -1,0 +1,121 @@
+﻿@model PaginatedResult<OfferDto>
+
+<div class="page-body">
+    <div class="container-xl">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Offers</h3>
+                    <div class="btn-group ms-auto">
+                        <a asp-action="Add" data-bs-toggle="modal" data-bs-target="#modal-action" class="btn btn-sm btn-primary">
+                            <i class="bi bi-file-earmark"></i> Create
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body border-bottom py-3">
+                    <div class="d-flex">
+                        <div class="text-muted">
+                            Show
+                            <div class="mx-2 d-inline-block">
+                                <input type="text" class="form-control form-control-sm" value="@Model.PageSize" size="3">
+                            </div>
+                            entries
+                        </div>
+                        <div class="ms-auto text-muted">
+                            Search:
+                            <div class="ms-2 d-inline-block">
+                                <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                            <tr>
+                                <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices"></th>
+                                <th>Id</th>
+                                <th>Request Id</th>
+                                <th>Employee User Id</th>
+                                <th>Offer Date</th>
+                                <th>Bid Amount</th>
+                                <th>Offer Status Id</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model == null || Model.Items.Count == 0)
+                            {
+                                <tr>
+                                    <td colspan="8" class="text-center">No items!</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td><input class="form-check-input m-0 align-middle" type="checkbox"></td>
+                                        <td><span class="text-muted">@item.OfferStatusId</span></td>
+                                        <td><span class="text-muted">@item.RequestId</span></td>
+                                        <td><span class="text-muted">@item.EmployeeUserId</span></td>
+                                        <td><span class="text-muted">@item.OfferDate</span></td>
+                                        <td><span class="text-muted">@item.BidAmount</span></td>
+                                        
+                                        <td class="text-end">
+                                            <a asp-action="View" asp-route-id="@item.OfferStatusId" data-bs-toggle="modal" data-bs-target="#modal-action" class="btn btn-sm btn-success">
+                                                <i class="bi bi-search"></i> View
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.OfferStatusId" data-bs-toggle="modal" data-bs-target="#modal-action" class="btn btn-sm btn-info">
+                                                <i class="bi bi-pencil"></i> Edit
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.OfferStatusId" data-bs-toggle="modal" data-bs-target="#modal-action" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i>  Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer d-flex align-items-center">
+                    <p class="m-0 text-muted">Showing <span>@Model.OffsetFrom</span> to <span>@Model.OffsetTo</span> of <span>@Model.TotalItems</span> entries</p>
+                    <ul class="pagination m-0 ms-auto">
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg>
+                                first
+                            </a>
+                        </li>
+                        <li class="page-item @(!Model.HasPreviousPage? "disabled" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-page="@(Model.Page - 1)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg>
+                                prev
+                            </a>
+                        </li>
+                        @for (int p = Model.Page; p <= Math.Min(Model.TotalPages, Model.Page + 19); p++)
+                        {
+                            var activeClass = p == Model.Page ? "active" : "";
+                            <li class="page-item @activeClass"><a class="page-link" asp-action="Index" asp-route-page="@p">@p</a></li>
+                        }
+                        <li class="page-item @(!Model.HasNextPage? "disabled" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-page="@(Model.Page + 1)">
+                                next
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-page="@Model.TotalPages">
+                                last
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("_Modal", new BootstrapModal { Id = "modal-action", AreaLabeledId = "modal-action-label", Size = ModalSize.Medium })
+

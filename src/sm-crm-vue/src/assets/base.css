@@ -1,0 +1,25 @@
+@import url('https://rsms.me/inter/inter.css');
+
+:root {
+  --c-white: #ffffff;
+  --c-black: #000000;
+  --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--c-black);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  font-feature-settings: "cv03", "cv04", "cv11";
+}

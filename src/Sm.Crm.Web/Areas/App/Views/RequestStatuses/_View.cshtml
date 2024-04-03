@@ -1,0 +1,12 @@
+﻿@model RequestStatusDto
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "Request Status Detail" })
+<div class="modal-body">
+    <div class="row mb-3">
+        <label asp-for="Name" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.Name</span>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true, CancelButtonText = "Close" })

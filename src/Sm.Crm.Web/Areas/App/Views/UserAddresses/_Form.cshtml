@@ -1,0 +1,33 @@
+﻿@model CreateOrEditUserAddressDto
+
+<form asp-action="@(Model.Id != null && Model.Id > 0 ? "Edit" : "Add")" role="form" method="post">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = (Model.Id != null && Model.Id > 0 ? "Edit" : "Add") + " UserAddress" })
+    <div class="modal-body form-horizontal">
+        @if (!Html.ViewData.ModelState.IsValid)
+        {
+            var error = "An error occured";
+            <partial name="_Alert" model="error" />
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        }
+        <input type="hidden" asp-for="Id" />
+        <div class="row mb-3">
+            <label asp-for="Country" class="col-lg-3 col-form-label"></label>
+            <div class="col-lg-9">
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="City" class="col-lg-3 col-form-label"></label>
+            <div class="col-lg-9">
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = Model.Id != null && Model.Id > 0 ? "Update" : "Save" })
+</form>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

@@ -1,0 +1,18 @@
+﻿@model NotificationDto
+
+@await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = "Notification Detail" })
+<div class="modal-body">
+    <div class="row mb-3">
+        <label asp-for="Title" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.Title</span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label asp-for="Description" class="col-lg-3 col-form-label"></label>
+        <div class="col-lg-9">
+            <span class="form-control">@Model.Description</span>
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_ModalFooter", new ModalFooter { OnlyCancelButton = true, CancelButtonText = "Close" })

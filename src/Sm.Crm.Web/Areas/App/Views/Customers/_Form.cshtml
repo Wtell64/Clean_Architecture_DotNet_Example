@@ -1,0 +1,53 @@
+﻿@model CreateOrUpdateCustomerDto
+
+<form asp-action="@(Model.Id != null && Model.Id > 0 ? "Edit" : "Add")" role="form" method="post">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = (Model.Id != null && Model.Id > 0 ? "Edit" : "Add") + " Customer" })
+    <div class="modal-body form-horizontal">
+        @if (!Html.ViewData.ModelState.IsValid)
+        {
+            var error = "An error occured";
+            <partial name="_Alert" model="error" />
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+        }
+        <input type="hidden" asp-for="Id" />
+        <div class="row mb-3">
+            <label asp-for="CompanyName" class="col-lg-3 col-form-label"></label>
+            <div class="col-lg-9">
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="TitleId" class="col-lg-3 col-form-label"></label>
+            <div class="col-lg-9">
+                <select asp-for="TitleId" class="form-select" asp-items="ViewBag.Titles">
+                    <option value="">Please select</option>
+                </select>
+                <span asp-validation-for="TitleId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="CustomerType" class="col-lg-3 col-form-label"></label>
+            <div class="col-lg-9">
+                <select asp-for="CustomerType" class="form-select" asp-items="ViewBag.CustomerTypes">
+                    <option value="">Please select</option>
+                </select>
+                <span asp-validation-for="CustomerType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="StatusTypeId" class="col-lg-3 col-form-label"></label>
+            <div class="col-lg-9">
+                <select asp-for="StatusTypeId" class="form-select" asp-items="ViewBag.StatusTypes">
+                    <option value="">Please select</option>
+                </select>
+                <span asp-validation-for="StatusTypeId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    @await Html.PartialAsync("_ModalFooter", new ModalFooter { SubmitButtonText = Model.Id != null && Model.Id > 0 ? "Update" : "Save" })
+</form>
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
